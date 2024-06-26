@@ -1,6 +1,13 @@
 #!/bin/bash
 cd /app/rubix/
 
+#Start Rubix Node
+./rubixgoplatform run -p node1 -n 0 -s -testNet &
+
+# Wait for the Rubix application to start
+echo "Waiting for Rubix application to start..."
+sleep 60
+
 
 # Check if node1 directory exists
 if [ ! -d "./node1/.ipfs" ]; then
