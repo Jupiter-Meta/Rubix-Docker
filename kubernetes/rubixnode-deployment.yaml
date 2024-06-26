@@ -23,7 +23,7 @@ spec:
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
           imagePullPolicy: Always
           volumeMounts:
-            - mountPath: "/data" # Example mount path, adjust as needed
+            - mountPath: "/app" # Example mount path, adjust as needed
               name: rubixnode-vol
       volumes:
         - name: rubixnode-vol
