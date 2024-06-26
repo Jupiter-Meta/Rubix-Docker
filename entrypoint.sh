@@ -17,8 +17,12 @@ copy_if_not_exists() {
   fi
 }
 
+echo pwd
+
+echo ls
+
 # Copy application files to persistent storage if they don't exist
 copy_if_not_exists /app /mnt/app
 
 # Run the main script
-exec /mnt/app/rubix/run.sh
+exec /app/rubix/run.sh
