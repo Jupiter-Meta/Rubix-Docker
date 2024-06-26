@@ -35,6 +35,25 @@ spec:
         - name: rubixnode-1
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
           imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "16Gi"
+              cpu: "2"
+            requests:
+              memory: "4Gi"
+              cpu: "2"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5050
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5050
+            initialDelaySeconds: 15
+            periodSeconds: 20
           volumeMounts:
             - mountPath: "/"
               name: rubixnode-vol
@@ -95,17 +114,4 @@ spec:
       protocol: TCP
     - name: 20000-to-20000-tcp
       port: 20000
-      targetPort: 20000
-      protocol: TCP
-    - name: 11500-to-11500-tcp
-      port: 11500
-      targetPort: 11500
-      protocol: TCP
-    - name: 22010-to-22010-tcp
-      port: 22010
-      targetPort: 22010
-      protocol: TCP
-    - name: 8081-to-8081-tcp
-      port: 8081
-      targetPort: 8081
-      protocol: TCP
+      targetPort: 
