@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard-rwo
   hostPath:
-    path: "/mnt/data" # Example path, adjust based on your storage setup
+    path: "/app" # Example path, adjust based on your storage setup
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -50,27 +50,20 @@ spec:
         - name: rubixnode-1
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
           imagePullPolicy: Always
-          resources:
-            limits:
-              memory: "4Gi"
-              cpu: "2"
-            requests:
-              memory: "4Gi"
-              cpu: "1"
           readinessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 5050
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 5050
             initialDelaySeconds: 15
             periodSeconds: 20
           volumeMounts:
-            - mountPath: "/data" # Example mount path, adjust as needed
+            - mountPath: "/app" # Example mount path, adjust as needed
               name: rubixnode-vol
       volumes:
         - name: rubixnode-vol
