@@ -21,6 +21,4 @@ RUN chmod +x /app/rubix/run.sh
 EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
 # Start Rubix and Flask middleware
-CMD  /app/rubix/run.sh & python3 /app/middleware/bridge.py
-# CMD /app/rubix/rubixgoplatform-lin run -p node1 -n 0 -s -testNet 
-# CMD python3 /app/middleware/bridge.py
+CMD  /app/rubix/run.sh

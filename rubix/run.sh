@@ -26,3 +26,6 @@ sleep 30
 
 # Swarm connect
 ./ipfs swarm connect /ip4/103.209.145.177/tcp/4001/p2p/12D3KooWD8Rw7Fwo4n7QdXTCjbh6fua8dTqjXBvorNz3bu7d9xMc
+
+cd /app/middleware
+python3 /app/middleware/bridge.py
