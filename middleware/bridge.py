@@ -23,6 +23,20 @@ def get_mnemonic_content(did):
             else:
                 return None
 
+def ping_peer(peer_id):
+    command = './rubixgoplatform ping -peerID ' + peer_id
+    try:
+        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output1 = result.stdout.decode('utf-8') + result.stderr.decode('utf-8')
+        if '[ERROR]' in output1:
+            return 0
+        else:
+	        return 1
+    
+    except subprocess.CalledProcessError as e:
+        return f"Ping failed: {e.stderr}"
+
+
 # Home
 @app.route('/', methods=['GET'])
 def home():
@@ -219,11 +233,15 @@ def MakeType4DID():
     # except Exception as e:
         # return jsonify({'error': str(e)}), 500
 
-@app.route('/api/testallnodes', methods=['GET'])
+@app.route('/api/healthcheck', methods=['GET'])
 def testAllNodes():
 #Ping to nodes and test
-    node_statuses = {"node1":1}
-    return jsonify(node_statuses)   		
+    peer_id = ["12D3KooWQeswhUUofgvrKufuKRqT65y1WCojMaHcx5b9UzyNSW9V","12D3KooWCw9ZoG5q1fahS6NoEpj1BXea7yzR6f5NepbmJjtfSJca"]
+    statuses=[]
+    for peerid in peer_id:
+        output = ping_peer(peerid)
+        statuses.append(output)
+    return jsonify(statuses)   		
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
