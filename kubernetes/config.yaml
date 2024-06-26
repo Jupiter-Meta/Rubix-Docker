@@ -1,4 +1,19 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rubixnode-pv
+  namespace: default
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard-rwo
+  hostPath:
+    path: "/mnt/data" # Example path, adjust based on your storage setup
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: rubixnodestorage
@@ -37,25 +52,25 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "16Gi"
+              memory: "4Gi"
               cpu: "2"
             requests:
               memory: "4Gi"
-              cpu: "2"
+              cpu: "1"
           readinessProbe:
             httpGet:
               path: /
-              port: 5050
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /
-              port: 5050
+              port: 80
             initialDelaySeconds: 15
             periodSeconds: 20
           volumeMounts:
-            - mountPath: "/"
+            - mountPath: "/data" # Example mount path, adjust as needed
               name: rubixnode-vol
       volumes:
         - name: rubixnode-vol
@@ -96,22 +111,44 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
 spec:
-  type: LoadBalancer
-  selector:
-    app: rubixnode
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 34.118.237.53
+  clusterIPs:
+    - 34.118.237.53
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
   ports:
     - name: 5050-to-5050-tcp
+      nodePort: 30710
       port: 5050
+      protocol: TCP
       targetPort: 5050
-      protocol: TCP
     - name: 5002-to-5002-tcp
+      nodePort: 31979
       port: 5002
+      protocol: TCP
       targetPort: 5002
-      protocol: TCP
     - name: 4002-to-4002-tcp
+      nodePort: 32296
       port: 4002
-      targetPort: 4002
       protocol: TCP
+      targetPort: 4002
     - name: 20000-to-20000-tcp
       port: 20000
-      targetPort: 
+      protocol: TCP
+      targetPort: 20000
+    - name: 11500-to-11500-tcp
+      port: 11500
+      protocol: TCP
+      targetPort: 11500
+    - name: 22010-to-22010-tcp
+      port: 22010
+      protocol: TCP
+      targetPort: 22010
+    - name: 8081-to-8081-tcp
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
