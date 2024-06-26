@@ -13,7 +13,7 @@ COPY run.sh /app
 # Copy Flask middleware files to the container
 COPY middleware /app/middleware
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh .
 RUN chmod +x /entrypoint.sh
 
 # Install Flask
@@ -26,4 +26,4 @@ EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
 # Start Rubix and Flask middleware
 # CMD  /app/rubix/run.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
