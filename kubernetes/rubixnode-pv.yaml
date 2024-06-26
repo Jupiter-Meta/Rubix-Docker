@@ -11,4 +11,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard-rwo
   hostPath:
-    path: "/app" # Example path, adjust based on your storage setup
+    path: "/mnt/data" # Example path, adjust based on your storage setup

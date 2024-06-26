@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy Rubix application files to the container
 COPY rubix /app/rubix
 
+COPY run.sh /app
 # COPY rubix/ipfs app/rubix
 
 # Copy Flask middleware files to the container
@@ -19,7 +20,7 @@ RUN chmod +x /entrypoint.sh
 RUN pip3 install Flask Flask-Cors requests
 
 RUN chmod +x /app/rubix/ipfs
-RUN chmod +x /app/rubix/run.sh
+RUN chmod +x /app/run.sh
 # Expose ports for Rubix and Flask
 EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
