@@ -25,7 +25,7 @@ spec:
           volumeMounts:
             - mountPath: "/app" # Example mount path, adjust as needed
               name: rubixnode-vol
-          workingDir: "/app
+          workingDir: "/app"
       volumes:
         - name: rubixnode-vol
           persistentVolumeClaim:
