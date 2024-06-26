@@ -221,8 +221,8 @@ def MakeType4DID():
 
 @app.route('/api/testallnodes', methods=['GET'])
 def testAllNodes():
-
-    node_statuses = {}
+#Ping to nodes and test
+    node_statuses = {"node1":1}
     return jsonify(node_statuses)   		
 
 if __name__ == '__main__':
