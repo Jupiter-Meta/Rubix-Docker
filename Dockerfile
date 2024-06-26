@@ -14,7 +14,7 @@ COPY run.sh /app
 COPY middleware /app/middleware
 
 COPY entrypoint.sh .
-RUN chmod +x /entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 # Install Flask
 RUN pip3 install Flask Flask-Cors requests
