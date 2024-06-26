@@ -32,5 +32,6 @@ copy_if_not_exists() {
 # Example: Copy application files to persistent storage if they don't exist
 copy_if_not_exists "/app" "/persistent/app"
 
+
 # Run the main script or application
 exec /persistent/app/run.sh
