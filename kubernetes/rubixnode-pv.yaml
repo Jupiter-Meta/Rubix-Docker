@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rubixnode-pv
+  namespace: default
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard-rwo
+  hostPath:
+    path: "/mnt/data" # Example path, adjust based on your storage setup
