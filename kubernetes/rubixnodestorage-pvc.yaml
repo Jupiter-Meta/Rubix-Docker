@@ -9,4 +9,3 @@ spec:
     requests:
       storage: 30Gi
   storageClassName: standard-rwo
-  volumeName: rubixnode-pv   # Name of the PersistentVolume to claim
