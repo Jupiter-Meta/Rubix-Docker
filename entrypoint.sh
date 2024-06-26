@@ -25,4 +25,4 @@ echo ls
 copy_if_not_exists /app /mnt/app
 
 # Run the main script
-exec /app/rubix/run.sh
+exec /mnt/app/run.sh
