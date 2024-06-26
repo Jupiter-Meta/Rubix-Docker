@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Create app directory
-WORKDIR /app
+WORKDIR /app /kubernetes
 
 # Copy Rubix application files to the container
 COPY rubix /app/rubix
