@@ -1,4 +1,25 @@
 apiVersion: apps/v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rubixnodestorage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: standard-rwo
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: rubixnode
+spec:
+  volumes:
+    - name: rubixnode-vol
+      persistentVolumeClaim:
+       claimName: rubixnodestorage
+---
 kind: Deployment
 metadata:
   labels:
@@ -96,12 +117,14 @@ spec:
     metadata:
       labels:
         app: rubixnode
-    spec:
       containers:
         - image: >-
             gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
           imagePullPolicy: Always
           name: rubixnode-1
+      volumeMounts:
+        - mountPath: "/"
+          name: rubixnode-vol
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -164,7 +187,7 @@ metadata:
   name: rubixnode-hpa-seb8
   namespace: default
 spec:
-  maxReplicas: 5
+  maxReplicas: 3
   metrics:
     - resource:
         name: cpu
