@@ -1,0 +1,26 @@
+# Use an official Ubuntu as a parent image
+FROM python:3.9-slim
+
+# Create app directory
+WORKDIR /app
+
+# Copy Rubix application files to the container
+COPY rubix /app/rubix
+
+# COPY rubix/ipfs app/rubix
+
+# Copy Flask middleware files to the container
+COPY middleware /app/middleware
+
+# Install Flask
+RUN pip3 install Flask Flask-Cors requests
+
+RUN chmod +x /app/rubix/ipfs
+RUN chmod +x /app/rubix/run.sh
+# Expose ports for Rubix and Flask
+EXPOSE 11500 20000 5002 4002 5050 22010 8081
+
+# Start Rubix and Flask middleware
+CMD  /app/rubix/run.sh & python3 /app/middleware/bridge.py
+# CMD /app/rubix/rubixgoplatform-lin run -p node1 -n 0 -s -testNet 
+# CMD python3 /app/middleware/bridge.py
