@@ -17,9 +17,9 @@ copy_if_not_exists() {
   fi
 }
 
-echo pwd
+pwd
 
-echo ls
+ls
 
 # Copy application files to persistent storage if they don't exist
 copy_if_not_exists /app /mnt/app
