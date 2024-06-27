@@ -4,14 +4,16 @@ FROM python:3.9-slim
 # Create app directory
 WORKDIR /app
 
+COPY . /app
+
 # Copy Rubix application files to the container
-COPY rubix /app/rubix
+# COPY rubix /app/rubix
 
 # COPY run.sh /app
 # COPY rubix/ipfs app/rubix
 
 # Copy Flask middleware files to the container
-COPY middleware /app/middleware
+# COPY middleware /app/middleware
 
 # COPY entrypoint.sh .
 # RUN chmod +x entrypoint.sh

@@ -6,7 +6,7 @@ python3 /app/middleware/bridge.py
 cd /app/rubix/
 
 #Start Rubix Node
-./rubixgoplatform run -p node1 -n 0 -s -testNet &
+./rubixgoplatform run -p node1 -n 0 -s -testNet
 
 # Wait for the Rubix application to start
 echo "Waiting for Rubix application to start..."
