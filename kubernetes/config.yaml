@@ -1,134 +1,119 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "2"
-    gcb-build-id: 9797f941-47e5-4dc4-af36-655e32d93395
-    gcb-trigger-id: 14c52915-3196-4e32-acbe-2af0cfd7f3a6
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1","gcb-build-id":"9797f941-47e5-4dc4-af36-655e32d93395","gcb-trigger-id":"14c52915-3196-4e32-acbe-2af0cfd7f3a6"},"creationTimestamp":"2024-06-27T06:57:35Z","generation":1,"labels":{"app":"rubixnodes-jm-mainnet","app.kubernetes.io/managed-by":"gcp-cloud-build-deploy","app.kubernetes.io/name":"rubixnodes-jm-mainnet","app.kubernetes.io/version":"cea3867b5648a600de4d88b2b3c73aaad8aeda8d"},"managedFields":[{"apiVersion":"apps/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:app":{}}},"f:spec":{"f:progressDeadlineSeconds":{},"f:replicas":{},"f:revisionHistoryLimit":{},"f:selector":{},"f:strategy":{"f:rollingUpdate":{".":{},"f:maxSurge":{},"f:maxUnavailable":{}},"f:type":{}},"f:template":{"f:metadata":{"f:labels":{".":{},"f:app":{}}},"f:spec":{"f:containers":{"k:{\"name\":\"rubixnode-sha256-1\"}":{".":{},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{}}},"f:dnsPolicy":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{}}}}},"manager":"unknown","operation":"Update","time":"2024-06-27T06:57:35Z"},{"apiVersion":"apps/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:deployment.kubernetes.io/revision":{}}},"f:status":{"f:availableReplicas":{},"f:conditions":{".":{},"k:{\"type\":\"Available\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Progressing\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:observedGeneration":{},"f:readyReplicas":{},"f:replicas":{},"f:updatedReplicas":{}}},"manager":"kube-controller-manager","operation":"Update","subresource":"status","time":"2024-06-27T06:57:56Z"}],"name":"rubixnodes-jm-mainnet","namespace":"default","resourceVersion":"11535","uid":"a845693f-5444-4574-8bd3-69c18ddad1b7"},"spec":{"progressDeadlineSeconds":600,"replicas":3,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"rubixnodes-jm-mainnet"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"annotations":{"gcb-build-id":"9797f941-47e5-4dc4-af36-655e32d93395","gcb-trigger-id":"14c52915-3196-4e32-acbe-2af0cfd7f3a6"},"creationTimestamp":null,"labels":{"app":"rubixnodes-jm-mainnet","app.kubernetes.io/managed-by":"gcp-cloud-build-deploy","app.kubernetes.io/name":"rubixnodes-jm-mainnet","app.kubernetes.io/version":"cea3867b5648a600de4d88b2b3c73aaad8aeda8d"}},"spec":{"containers":[{"image":"https://gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker","imagePullPolicy":"IfNotPresent","name":"rubixnode-sha256-1","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}},"status":{"availableReplicas":3,"conditions":[{"lastTransitionTime":"2024-06-27T06:57:56Z","lastUpdateTime":"2024-06-27T06:57:56Z","message":"Deployment has minimum availability.","reason":"MinimumReplicasAvailable","status":"True","type":"Available"},{"lastTransitionTime":"2024-06-27T06:57:36Z","lastUpdateTime":"2024-06-27T06:57:56Z","message":"ReplicaSet \"rubixnodes-jm-mainnet-59f47f9bf4\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"}],"observedGeneration":1,"readyReplicas":3,"replicas":3,"updatedReplicas":3}}
-  creationTimestamp: "2024-06-27T06:57:35Z"
-  generation: 2
   labels:
     app: rubixnodes-jm-mainnet
-    app.kubernetes.io/managed-by: gcp-cloud-build-deploy
-    app.kubernetes.io/name: rubixnodes-jm-mainnet
-    app.kubernetes.io/version: cea3867b5648a600de4d88b2b3c73aaad8aeda8d
   managedFields:
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:labels:
-          .: {}
-          f:app: {}
-      f:spec:
-        f:progressDeadlineSeconds: {}
-        f:replicas: {}
-        f:revisionHistoryLimit: {}
-        f:selector: {}
-        f:strategy:
-          f:rollingUpdate:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
             .: {}
-            f:maxSurge: {}
-            f:maxUnavailable: {}
-          f:type: {}
-        f:template:
-          f:metadata:
-            f:labels:
+            'f:app': {}
+        'f:spec':
+          'f:progressDeadlineSeconds': {}
+          'f:replicas': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector': {}
+          'f:strategy':
+            'f:rollingUpdate':
               .: {}
-              f:app: {}
-          f:spec:
-            f:containers:
-              k:{"name":"rubixnode-sha256-1"}:
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+            'f:type': {}
+          'f:template':
+            'f:metadata':
+              'f:labels':
                 .: {}
-                f:imagePullPolicy: {}
-                f:name: {}
-                f:resources: {}
-                f:terminationMessagePath: {}
-                f:terminationMessagePolicy: {}
-            f:dnsPolicy: {}
-            f:restartPolicy: {}
-            f:schedulerName: {}
-            f:securityContext: {}
-            f:terminationGracePeriodSeconds: {}
-    manager: unknown
-    operation: Update
-    time: "2024-06-27T06:57:35Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          .: {}
-          f:deployment.kubernetes.io/revision: {}
-      f:status:
-        f:availableReplicas: {}
-        f:conditions:
-          .: {}
-          k:{"type":"Available"}:
+                'f:app': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"rubixnode-sha256-1"}':
+                  .: {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+                  'f:resources': {}
+                  'f:terminationMessagePath': {}
+                  'f:terminationMessagePolicy': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:securityContext': {}
+              'f:terminationGracePeriodSeconds': {}
+      manager: unknown
+      operation: Update
+      time: '2024-06-27T06:57:35Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
             .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Progressing"}:
+            'f:deployment.kubernetes.io/revision': {}
+        'f:status':
+          'f:availableReplicas': {}
+          'f:conditions':
             .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-        f:observedGeneration: {}
-        f:readyReplicas: {}
-        f:replicas: {}
-        f:unavailableReplicas: {}
-        f:updatedReplicas: {}
-    manager: kube-controller-manager
-    operation: Update
-    subresource: status
-    time: "2024-06-27T07:16:43Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          f:gcb-build-id: {}
-          f:gcb-trigger-id: {}
-          f:kubectl.kubernetes.io/last-applied-configuration: {}
-        f:labels:
-          f:app.kubernetes.io/managed-by: {}
-          f:app.kubernetes.io/name: {}
-          f:app.kubernetes.io/version: {}
-      f:spec:
-        f:template:
-          f:metadata:
-            f:annotations:
+            'k:{"type":"Available"}':
               .: {}
-              f:gcb-build-id: {}
-              f:gcb-trigger-id: {}
-            f:labels:
-              f:app.kubernetes.io/managed-by: {}
-              f:app.kubernetes.io/name: {}
-              f:app.kubernetes.io/version: {}
-          f:spec:
-            f:containers:
-              k:{"name":"rubixnode-sha256-1"}:
-                f:image: {}
-    manager: kubectl-client-side-apply
-    operation: Update
-    time: "2024-06-27T07:16:43Z"
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Progressing"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:observedGeneration': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+          'f:unavailableReplicas': {}
+          'f:updatedReplicas': {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2024-06-27T07:16:43Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:gcb-build-id': {}
+            'f:gcb-trigger-id': {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+          'f:labels':
+            'f:app.kubernetes.io/managed-by': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/version': {}
+        'f:spec':
+          'f:template':
+            'f:metadata':
+              'f:annotations':
+                .: {}
+                'f:gcb-build-id': {}
+                'f:gcb-trigger-id': {}
+              'f:labels':
+                'f:app.kubernetes.io/managed-by': {}
+                'f:app.kubernetes.io/name': {}
+                'f:app.kubernetes.io/version': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"rubixnode-sha256-1"}':
+                  'f:image': {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: '2024-06-27T07:16:43Z'
   name: rubixnodes-jm-mainnet
   namespace: default
-  resourceVersion: "22690"
-  uid: a845693f-5444-4574-8bd3-69c18ddad1b7
 spec:
-  progressDeadlineSeconds: 600
   replicas: 3
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: rubixnodes-jm-mainnet
@@ -139,45 +124,86 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        gcb-build-id: 9797f941-47e5-4dc4-af36-655e32d93395
-        gcb-trigger-id: 14c52915-3196-4e32-acbe-2af0cfd7f3a6
-      creationTimestamp: null
       labels:
         app: rubixnodes-jm-mainnet
-        app.kubernetes.io/managed-by: gcp-cloud-build-deploy
-        app.kubernetes.io/name: rubixnodes-jm-mainnet
-        app.kubernetes.io/version: cea3867b5648a600de4d88b2b3c73aaad8aeda8d
     spec:
       containers:
-      - image: https://gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
-        imagePullPolicy: IfNotPresent
-        name: rubixnode-sha256-1
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 3
-  conditions:
-  - lastTransitionTime: "2024-06-27T06:57:56Z"
-    lastUpdateTime: "2024-06-27T06:57:56Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2024-06-27T06:57:36Z"
-    lastUpdateTime: "2024-06-27T07:16:43Z"
-    message: ReplicaSet "rubixnodes-jm-mainnet-d4c88675b" is progressing.
-    reason: ReplicaSetUpdated
-    status: "True"
-    type: Progressing
-  observedGeneration: 2
-  readyReplicas: 3
-  replicas: 4
-  unavailableReplicas: 1
-  updatedReplicas: 1
+        - image: >-
+            gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
+          imagePullPolicy: IfNotPresent
+          name: rubixnode-sha256-1
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: rubixnodes-jm-mainnet
+  managedFields:
+    - apiVersion: autoscaling/v2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:maxReplicas': {}
+          'f:metrics': {}
+          'f:minReplicas': {}
+          'f:scaleTargetRef':
+            'f:apiVersion': {}
+            'f:kind': {}
+            'f:name': {}
+      manager: unknown
+      operation: Update
+      time: '2024-06-27T06:57:36Z'
+    - apiVersion: autoscaling/v2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:conditions':
+            .: {}
+            'k:{"type":"AbleToScale"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"ScalingActive"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"ScalingLimited"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:currentMetrics': {}
+          'f:currentReplicas': {}
+          'f:desiredReplicas': {}
+      manager: vpa-recommender
+      operation: Update
+      subresource: status
+      time: '2024-06-27T07:13:54Z'
+  name: rubixnodes-jm-mainnet-hpa-zcce
+  namespace: default
+spec:
+  maxReplicas: 5
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rubixnodes-jm-mainnet
