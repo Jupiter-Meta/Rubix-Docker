@@ -9,11 +9,10 @@ WORKDIR /app
 # Copy Rubix application files to the container
 COPY rubix /app/rubix
 
-# COPY run.sh /app
-# COPY rubix/ipfs app/rubix
-
 # Copy Flask middleware files to the container
 COPY middleware /app/middleware
+
+COPY kubernetes /app/kubernetes
 
 # COPY entrypoint.sh .
 # RUN chmod +x entrypoint.sh
