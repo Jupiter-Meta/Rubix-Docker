@@ -246,7 +246,7 @@ def testAllNodes():
     return jsonify(statuses)   	
 
 @app.route('/status', methods=['GET'])
-def testAllNodes():
+def testAllNodes2():
     return jsonify({"status":"ok"})  	
 
 if __name__ == '__main__':
