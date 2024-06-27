@@ -5,7 +5,8 @@ __pycache__/
 .DS_Store
 # C extensions
 *.so
-
+node1/
+rubix/node*/
 # Distribution / packaging
 .Python
 build/
