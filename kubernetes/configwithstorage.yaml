@@ -15,21 +15,32 @@ spec:
       labels:
         app: rubixnodes-jm-mainnet
     spec:
-      initContainers:
-        - name: setup-files
-          image: busybox
-          command: ['sh', '-c', 'cp /app/rubix/run.sh /app/rubix/run.sh']
-          volumeMounts:
-            - name: rubix-storage
-              mountPath: /app
       containers:
         - name: rubixnode-sha256-1
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: rubix-storage
-              mountPath: /app
+              mountPath: /app/rubix
       volumes:
         - name: rubix-storage
           persistentVolumeClaim:
-            claimName: rubix-main-pvc  # Ensure this matches the PVC name defined above
+            claimName: rubix-main-pvc  # Ensure this matches the PVC name defined below
+  lifecycle:
+    preStop:
+      exec:
+        command: ["/bin/sh", "-c", "cp -r /app/rubix/node1 /mnt/persistent-storage"]
+    postStart:
+      exec:
+        command: ["/bin/sh", "-c", "if [ -d /mnt/persistent-storage/node1 ]; then cp -r /mnt/persistent-storage/node1 /app/rubix/; fi"]
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rubix-main-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce  # Adjust based on your needs (e.g., ReadWriteMany for multiple nodes)
+  resources:
+    requests:
+      storage: 20Gi  # Adjust size as per your requirements
