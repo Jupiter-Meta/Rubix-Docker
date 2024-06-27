@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rubixnodes-jm-mainnet
+  namespace: default
+  labels:
+    app: rubixnodes-jm-mainnet
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rubixnodes-jm-mainnet
+  template:
+    metadata:
+      labels:
+        app: rubixnodes-jm-mainnet
+    spec:
+      containers:
+        - name: rubixnode-sha256-1
+          image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: rubix-storage
+              mountPath: /app/rubix
+      volumes:
+        - name: rubix-storage
+          persistentVolumeClaim:
+            claimName: rubix-main-pvc # This should match your PVC name
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rubix-main-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce  # Adjust based on your needs (e.g., ReadWriteMany for multiple nodes)
+  resources:
+    requests:
+      storage: 20Gi  # Adjust size as per your requirements
