@@ -25,5 +25,5 @@ RUN chmod +x /app/run.sh
 EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
 # Start Rubix and Flask middleware
-# CMD  /app/rubix/run.sh
-ENTRYPOINT ["./entrypoint.sh"]
+CMD  /app/rubix/run.sh
+# ENTRYPOINT ["./entrypoint.sh"]
