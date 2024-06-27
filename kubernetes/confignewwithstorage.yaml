@@ -35,4 +35,4 @@ spec:
     - ReadWriteOnce  # Adjust as per your requirements
   resources:
     requests:
-      storage: 10Gi  # Adjust the storage size as per your requirements
+      storage: 30Gi  # Adjust the storage size as per your requirements
