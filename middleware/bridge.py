@@ -6,7 +6,7 @@ import json
 import os, subprocess
 
 current_directory = os.getcwd()
-# print("Current Directory:", current_directory)
+print("Current Directory:", current_directory)
 
 os.chdir(current_directory+"")
 
@@ -14,7 +14,7 @@ app = Flask(__name__)
 # CORS(app)
 
 def get_mnemonic_content(did):
-            path = "~/Rubix-Docker/rubix"
+            path = "/home/saishibu/Rubix-Docker/rubix"
             mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
             if os.path.exists(mnemonic_path):
                 with open(mnemonic_path, 'r') as file:

@@ -1,0 +1,15 @@
+=============== Jun 27, 2024 (UTC) ===============
+16:10:28.000072 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:10:28.004649 db@open opening
+16:10:28.006246 version@stat F·[] S·0B[] Sc·[]
+16:10:28.007918 db@janitor F·2 G·0
+16:10:28.007946 db@open done T·3.279821ms
+=============== Jun 27, 2024 (UTC) ===============
+16:13:40.060066 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:13:40.060203 version@stat F·[] S·0B[] Sc·[]
+16:13:40.060226 db@open opening
+16:13:40.060269 journal@recovery F·1
+16:13:40.061780 journal@recovery recovering @1
+16:13:40.063660 version@stat F·[] S·0B[] Sc·[]
+16:13:40.069985 db@janitor F·2 G·0
+16:13:40.070017 db@open done T·9.784331ms
