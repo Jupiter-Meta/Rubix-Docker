@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: rubix-main-storage
-              mountPath: /app/rubix
+              mountPath: /app
       volumes:
         - name: rubix-main-storage
           persistentVolumeClaim:
