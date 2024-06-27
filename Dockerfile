@@ -4,16 +4,16 @@ FROM python:3.9-slim
 # Create app directory
 WORKDIR /app
 
-COPY . /app
+# COPY . /app
 
 # Copy Rubix application files to the container
-# COPY rubix /app/rubix
+COPY rubix /app/rubix
 
 # COPY run.sh /app
 # COPY rubix/ipfs app/rubix
 
 # Copy Flask middleware files to the container
-# COPY middleware /app/middleware
+COPY middleware /app/middleware
 
 # COPY entrypoint.sh .
 # RUN chmod +x entrypoint.sh
@@ -26,8 +26,8 @@ RUN chmod +x /app/rubix/run.sh
 # Expose ports for Rubix and Flask
 EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
-CMD /app/rubix/rubixgoplatform run -p node1 -n 0 -s -testNet & python3 /app/middleware/bridge.py
+# CMD /app/rubix/rubixgoplatform run -p node1 -n 0 -s -testNet & python3 /app/middleware/bridge.py
 
 # Start Rubix and Flask middleware
-# CMD  /app/rubix/run.sh
+CMD  /app/rubix/run.sh
 # ENTRYPOINT ["./entrypoint.sh"]
