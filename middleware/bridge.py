@@ -233,10 +233,12 @@ def MakeType4DID():
     # except Exception as e:
         # return jsonify({'error': str(e)}), 500
 
-@app.route('/api/healthcheck', methods=['GET'])
+@app.route('/api/healthcheck', methods=['POST'])
 def testAllNodes():
 #Ping to nodes and test
-    peer_id = ["12D3KooWQeswhUUofgvrKufuKRqT65y1WCojMaHcx5b9UzyNSW9V","12D3KooWCw9ZoG5q1fahS6NoEpj1BXea7yzR6f5NepbmJjtfSJca"]
+    # peer_id = ["12D3KooWQeswhUUofgvrKufuKRqT65y1WCojMaHcx5b9UzyNSW9V","12D3KooWCw9ZoG5q1fahS6NoEpj1BXea7yzR6f5NepbmJjtfSJca"]
+    data = request.get_json()
+    peer_id = data.get('peer_id', [])
     statuses=[]
     for peerid in peer_id:
         output = ping_peer(peerid)
