@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rubix-main-pv
+spec:
+  capacity:
+    storage: 30Gi  # Adjust storage size as per your requirements
+  accessModes:
+    - ReadWriteOnce  # Access mode (adjust based on your needs)
+  persistentVolumeReclaimPolicy: Retain  # Retain data when PV is released
+  storageClassName: rubix-storage-class  # Name of the StorageClass
+  hostPath:
+    path: /mnt/data  # Host path where the volume is mounted
