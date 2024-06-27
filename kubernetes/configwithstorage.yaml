@@ -15,6 +15,13 @@ spec:
       labels:
         app: rubixnodes-jm-mainnet
     spec:
+      initContainers:
+        - name: setup-files
+          image: busybox
+          command: ['sh', '-c', 'cp /app/rubix/run.sh /app/rubix/run.sh']
+          volumeMounts:
+            - name: rubix-storage
+              mountPath: /app
       containers:
         - name: rubixnode-sha256-1
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
