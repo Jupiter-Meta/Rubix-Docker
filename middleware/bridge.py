@@ -18,7 +18,7 @@ def get_mnemonic_content(did):
             mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
             if os.path.exists(mnemonic_path):
                 with open(mnemonic_path, 'r') as file:
-                    content = file.read()
+                    content = file.read().split()
                 return content
             else:
                 return None

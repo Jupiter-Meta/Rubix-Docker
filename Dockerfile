@@ -21,6 +21,8 @@ COPY rubix /app/rubix
 # Copy Flask middleware files to the container
 COPY middleware /app/middleware
 
+COPY rubix/ipfs /app
+
 # COPY kubernetes /app/kubernetes
 
 # COPY entrypoint.sh .
@@ -35,7 +37,7 @@ RUN chmod +x /app/rubix/rubixgoplatform
 # Expose ports for Rubix and Flask
 EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
-CMD python3 /app/middleware/bridge.py & /app/rubix/rubixgoplatform run -p node1 -n 0 -s -testNet
+CMD python3 /app/middleware/bridge.py & ./app/rubix/rubixgoplatform run -p node1 -n 0 -s -testNet
 
 
 
