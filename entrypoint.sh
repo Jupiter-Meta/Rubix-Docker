@@ -29,6 +29,7 @@ copy_if_not_exists() {
   done
 }
 
+
 # Example: Copy application files to persistent storage if they don't exist
 copy_if_not_exists "/app" "/persistent/app"
 
