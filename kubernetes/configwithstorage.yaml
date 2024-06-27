@@ -12,8 +12,14 @@ spec:
       app: rubixnodes-jm-mainnet
   template:
     metadata:
+      annotations:
+        gcb-build-id: 089fa908-249c-4a78-998b-c87444a187d8
+        gcb-trigger-id: 14c52915-3196-4e32-acbe-2af0cfd7f3a6
       labels:
         app: rubixnodes-jm-mainnet
+        app.kubernetes.io/managed-by: gcp-cloud-build-deploy
+        app.kubernetes.io/name: rubixnodes-jm-mainnet
+        app.kubernetes.io/version: 45b044c26f2b7d67bbdd787280873f3bc92e7b59
     spec:
       containers:
         - name: rubixnode-sha256-1
@@ -22,25 +28,14 @@ spec:
           volumeMounts:
             - name: rubix-storage
               mountPath: /app/rubix
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "if [ -d /mnt/persistent-storage/node1 ]; then cp -r /mnt/persistent-storage/node1 /app/rubix/; fi"]
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /app/rubix/node1 /mnt/persistent-storage"]
       volumes:
         - name: rubix-storage
           persistentVolumeClaim:
-            claimName: rubix-main-pvc  # Ensure this matches the PVC name defined below
-  lifecycle:
-    preStop:
-      exec:
-        command: ["/bin/sh", "-c", "cp -r /app/rubix/node1 /mnt/persistent-storage"]
-    postStart:
-      exec:
-        command: ["/bin/sh", "-c", "if [ -d /mnt/persistent-storage/node1 ]; then cp -r /mnt/persistent-storage/node1 /app/rubix/; fi"]
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: rubix-main-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce  # Adjust based on your needs (e.g., ReadWriteMany for multiple nodes)
-  resources:
-    requests:
-      storage: 20Gi  # Adjust size as per your requirements
+            claimName: rubix-main-pvc
