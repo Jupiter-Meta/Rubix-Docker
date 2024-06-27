@@ -243,7 +243,11 @@ def testAllNodes():
     for peerid in peer_id:
         output = ping_peer(peerid)
         statuses.append(output)
-    return jsonify(statuses)   		
+    return jsonify(statuses)   	
+
+@app.route('/status', methods=['GET'])
+def testAllNodes():
+    return jsonify({"status":"ok"})  	
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
