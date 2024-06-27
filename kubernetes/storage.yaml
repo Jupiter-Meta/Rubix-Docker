@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rubix-main-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce  # Adjust based on your needs (e.g., ReadWriteMany for multiple nodes)
+  resources:
+    requests:
+      storage: 20Gi  # Adjust size as per your requirements

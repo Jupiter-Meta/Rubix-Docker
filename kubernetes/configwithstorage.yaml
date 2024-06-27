@@ -15,13 +15,6 @@ spec:
       labels:
         app: rubixnodes-jm-mainnet
     spec:
-      initContainers:
-        - name: copy-files
-          image: busybox
-          command: ['sh', '-c', 'cp -r /app /app']
-          volumeMounts:
-            - name: rubix-storage
-              mountPath: /app
       containers:
         - name: rubixnode-sha256-1
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
@@ -32,15 +25,4 @@ spec:
       volumes:
         - name: rubix-storage
           persistentVolumeClaim:
-            claimName: rubix-main-pvc # This should match your PVC name
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: rubix-main-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce  # Adjust based on your needs (e.g., ReadWriteMany for multiple nodes)
-  resources:
-    requests:
-      storage: 20Gi  # Adjust size as per your requirements
+            claimName: rubix-main-pvc  # Ensure this matches the PVC name defined above
