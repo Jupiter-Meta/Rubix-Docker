@@ -15,13 +15,20 @@ spec:
       labels:
         app: rubixnodes-jm-mainnet
     spec:
+      initContainers:
+        - name: copy-files
+          image: busybox
+          command: ['sh', '-c', 'cp -r /app /app']
+          volumeMounts:
+            - name: rubix-storage
+              mountPath: /app
       containers:
         - name: rubixnode-sha256-1
           image: gcr.io/optimal-courage-425706-k2/github.com/jupiter-meta/rubix-docker
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: rubix-storage
-              mountPath: /app/rubix
+              mountPath: /app
       volumes:
         - name: rubix-storage
           persistentVolumeClaim:
