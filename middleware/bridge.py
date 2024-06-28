@@ -8,14 +8,16 @@ import os, subprocess
 current_directory = os.getcwd()
 print("Current Directory:", current_directory)
 
-os.chdir(current_directory+"")
+os.chdir(current_directory+"/..")
+home_directory = os.getcwd()
+print(home_directory)
 
 app = Flask(__name__)
 # CORS(app)
 
 def get_mnemonic_content(did):
-            path = "/home/saishibu/Rubix-Docker/rubix"
-            mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
+            path = home_directory
+            mnemonic_path = os.path.join(path,'rubix', 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
             if os.path.exists(mnemonic_path):
                 with open(mnemonic_path, 'r') as file:
                     content = file.read().split()
@@ -24,10 +26,12 @@ def get_mnemonic_content(did):
                 return None
 
 def ping_peer(peer_id):
+    os.chdir(home_directory+"/rubix")
     command = './rubixgoplatform ping -peerID ' + peer_id
     try:
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output1 = result.stdout.decode('utf-8') + result.stderr.decode('utf-8')
+        print(output1)
         if '[ERROR]' in output1:
             return 0
         else:
@@ -71,7 +75,7 @@ def createParentDID():
         response = requests.post(url, data=form_data, files=files)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(elapsed_time)
+        # print(elapsed_time)
     # Check the response status code
         if response.status_code == 200:
              message = json.loads(response.text)
@@ -85,10 +89,10 @@ def createParentDID():
                            'peerid':peerid,
                            'timeTaken':elapsed_time,
                            }
-                print(didpeerid)
+                # print(didpeerid)
                 return jsonify(didpeerid)
              else:
-                print(message)
+                # print(message)
                 return message
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
@@ -124,14 +128,14 @@ def createchildDID():
         response = requests.post(url, data=form_data, files=files)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(elapsed_time)
+        # print(elapsed_time)
     # Check the response status code
         if response.status_code == 200:
         # Request was successful
             message = json.loads(response.text)
             if message['status'] == True:
-                print(message['result']['did'])
-                print(message['result']['peer_id'])
+                # print(message['result']['did'])
+                # print(message['result']['peer_id'])
                 didpeerid={'status':True,
                            'did':message['result']['did'],
                            'peerid':message['result']['peer_id'],
@@ -139,7 +143,7 @@ def createchildDID():
                 # Remove the _id field if it exists
                 return jsonify(didpeerid)
             else:
-                print(message)
+                # print(message)
                 return message
         else:
             print(f"POST request failed with status code {response.status_code}")
@@ -169,7 +173,7 @@ def createbibdid():
         # try:
             # response = requests.post(url, data=form_data, files=files)
             response = requests.post(url, headers=headers, files=files)
-            print(response.text)
+            # print(response.text)
     # Check the response status code
             if response.status_code == 200:
                 message = json.loads(response.text)
@@ -198,7 +202,7 @@ def MakeType4DID():
     # try:
     for i in range(1):
         path = current_directory
-        print(path)
+        # print(path)
         os.chdir("/app/rubix")
 
         command = "./rubixgoplatform createdid -testNet -didType 4"
