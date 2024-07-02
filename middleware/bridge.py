@@ -9,7 +9,7 @@ current_directory = os.getcwd()
 print("Current Directory:", current_directory)
 
 # os.chdir(current_directory+"/..")
-home_directory = /Rubix-Docker
+home_directory = "/Rubix-Docker"
 print(home_directory)
 
 app = Flask(__name__)
