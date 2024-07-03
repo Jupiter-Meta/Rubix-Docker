@@ -4,6 +4,8 @@ import requests,json, time, sys
 from flask_cors import CORS
 import json
 import os, subprocess
+from redirectToken import generate_token
+
 
 current_directory = os.getcwd()
 print("Current Directory:", current_directory)
@@ -13,7 +15,7 @@ home_directory = os.getcwd()
 print(home_directory)
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 def get_mnemonic_content(did):
             path = home_directory
@@ -252,6 +254,101 @@ def testAllNodes():
 @app.route('/status', methods=['GET'])
 def testAllNodes2():
     return jsonify({"status":"ok"})  	
+
+
+
+##DBHANDLER
+@app.route('/fetchtxn', methods=['POST'])
+def fetchtxn():
+    size = int(request.json.get('size'))
+    url = 'http://172.28.57.14:5050/fetchtxn'
+    payload = {
+    'size': size 
+    }
+
+    response = requests.post(url, json=payload)
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        return jsonify({"error":{"status":response.status_code, "response":response.text}})
+
+@app.route('/fetchattr', methods=['POST'])
+def fetchattr():
+    size = int(request.json.get('size'))
+    url = 'http://172.28.57.14:5050/fetchattr'
+    payload = {
+    'size': size 
+    }
+
+    response = requests.post(url, json=payload)
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        return jsonify({"error":{"status":response.status_code, "response":response.text}})
+
+@app.route('/writeattr', methods=['POST'])
+def writeattr():
+    data = request.get_json()
+    url = 'http://172.28.57.14:5050/writeattr'
+    
+    # Extract data from JSON payload
+    payload = {
+        "UserID": data.get('UserID'),
+        "DID": data.get('DID'),
+        "Attributes": data.get('Attributes'),
+        "Keywords": data.get('Keywords'),
+        "isOnboarded": data.get('isOnboarded')
+    }
+
+    response = requests.post(url, json=payload)
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        return jsonify({"error":{"status":response.status_code, "response":response.text}})
+
+
+##INSIGHTINTELLIGENCE-WEBURLHANDLER
+@app.route('/getUserID', methods=['POST'])
+def home1():
+
+	userID = request.json["userId"]
+	
+	table = ["IRCTC1"]
+	userData = {}
+
+	auth_url = "https://devapi.insightengine.in/v2/web/web_auth"
+	if userID in table:
+		userData["did"] ="bafy"
+		redirect_token = generate_token(userID,userData["did"])
+		userData["redirect_token"] = redirect_token
+	else:
+		api_url = "http://34.100.247.26:5050/api/createUserDID"
+		response = requests.get(api_url)
+		if response.status_code == 200:
+			response_data = response.json()  # Assuming response is a dictionary
+			userData={
+				"did":response_data["did"],
+				"peerID":response_data["peerid"],
+				"Mnemonic":response_data["Mnemonic"],	
+            }
+			redirect_token = generate_token(userID,userData["did"])
+			userData["redirect_token"] = redirect_token 
+		else:
+			userData["did"] = None
+	userData["userId"] = userID
+	userData["platform"] = "iOS"
+	userData["bussiness-id"] = "660a7e6725e206f03c2c9dd0"
+	userData["merchant-id"] = "irctc"
+	auth_response = requests.post(auth_url, json=userData)
+	print(userData)
+	if auth_response.status_code == 200:
+		return jsonify({"status":True, "message":"auth success","url":f"https://irctc.insightengine.in?redirect_token={redirect_token}"})
+	else:
+		return jsonify({"status":False, "message":"auth failed"})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
