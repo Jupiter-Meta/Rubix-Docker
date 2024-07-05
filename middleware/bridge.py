@@ -32,7 +32,7 @@ def dbWrite(data):
 
 def get_mnemonic_content(did):
             path = home_directory
-            path = "/Users/saishibunb/Downloads/rubixgoplatform-v0.0.17-darwin-amd64"
+            path = "/home/saishibu/Rubix-Docker/rubix"
             mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
             if os.path.exists(mnemonic_path):
                 with open(mnemonic_path, 'r') as file:
