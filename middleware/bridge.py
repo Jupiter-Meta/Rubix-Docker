@@ -5,6 +5,11 @@ from flask_cors import CORS
 import json
 import os, subprocess
 from redirectToken import generate_token
+from pymongo import MongoClient
+
+client = MongoClient('mongodb+srv://jmRubix:JupiterMeta%40jmRubix@jm-rubix.qmlx6.mongodb.net/')
+db = client['jmdidtable']
+collection = db['irctcusers']
 
 
 current_directory = os.getcwd()
@@ -17,9 +22,18 @@ print(home_directory)
 app = Flask(__name__)
 CORS(app)
 
+
+def dbWrite(data):
+      try:
+        collection.insert_one(data)
+        return 1
+      except:
+           return 0
+
 def get_mnemonic_content(did):
             path = home_directory
-            mnemonic_path = os.path.join(path,'rubix', 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
+            path = "/Users/saishibunb/Downloads/rubixgoplatform-v0.0.17-darwin-amd64"
+            mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
             if os.path.exists(mnemonic_path):
                 with open(mnemonic_path, 'r') as file:
                     content = file.read().split()
@@ -29,6 +43,7 @@ def get_mnemonic_content(did):
 
 def ping_peer(peer_id):
     os.chdir(home_directory+"/rubix")
+    # os.chdir("/Users/saishibunb/Downloads/rubixgoplatform-v0.0.17-darwin-amd64/")
     command = './rubixgoplatform ping -peerID ' + peer_id
     try:
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -198,6 +213,49 @@ def createbibdid():
                     return jsonify(didpeerid)
                 else:
                     return "Failed to create DID"
+                
+@app.route('/api/createUserDIDwithDB', methods=['GET'])
+def createbibdidDB():
+    print("create child BIB DID API")
+    port=20002
+    didpeerid = {}
+
+    for i in range (1):
+    # try:
+        # Define the API endpoint URL
+        url = "http://localhost:20000/api/createdid"
+        files = {'did_config': (None, '{"type": 4, "priv_pwd": "mypassword"}'),}
+        headers = {}
+
+        for i in range(1):
+        # try:
+            # response = requests.post(url, data=form_data, files=files)
+            response = requests.post(url, headers=headers, files=files)
+            # print(response.text)
+    # Check the response status code
+            if response.status_code == 200:
+                message = json.loads(response.text)
+                
+                if message['status'] == True:
+                    did = message['result']['did']
+                    peerid = message['result']['peer_id']
+
+                    didpeerid={'status':True,
+                           'did':did,
+                           'peerid':peerid,
+                           }
+                    content = get_mnemonic_content(did)
+                    if content:
+                        didpeerid['Mnemonic'] = content
+
+                    else:
+                        didpeerid["Mnemonic"] = "mnemonic.txt not found"
+                    dbWrite(didpeerid)
+                    if '_id' in didpeerid:
+                        didpeerid.pop('_id')    
+                    return jsonify(didpeerid)
+                else:
+                    return "Failed to create DID"
 
 @app.route('/api/createUserDID2', methods=['GET'])
 def MakeType4DID():
@@ -256,7 +314,6 @@ def testAllNodes2():
     return jsonify({"status":"ok"})  	
 
 
-
 ##DBHANDLER
 @app.route('/fetchtxn', methods=['POST'])
 def fetchtxn():
@@ -311,6 +368,7 @@ def writeattr():
 
 
 ##INSIGHTINTELLIGENCE-WEBURLHANDLER
+
 @app.route('/getUserID', methods=['POST'])
 def home1():
 
@@ -325,7 +383,7 @@ def home1():
 		redirect_token = generate_token(userID,userData["did"])
 		userData["redirect_token"] = redirect_token
 	else:
-		api_url = "http://34.100.247.26:5050/api/createUserDID"
+		api_url = "http://34.47.131.10:5050//api/createUserDID"
 		response = requests.get(api_url)
 		if response.status_code == 200:
 			response_data = response.json()  # Assuming response is a dictionary
@@ -345,9 +403,38 @@ def home1():
 	auth_response = requests.post(auth_url, json=userData)
 	print(userData)
 	if auth_response.status_code == 200:
-		return jsonify({"status":True, "message":"auth success","url":f"https://irctc.insightengine.in?redirect_token={redirect_token}"})
+		return jsonify({"status":"true", "message":"auth success","url":f"https://irctc.insightengine.in?redirect_token={redirect_token}"})
 	else:
-		return jsonify({"status":False, "message":"auth failed"})
+		return jsonify({"status":"false", "message":"auth failed"})
+     
+
+@app.route('/getUserIDFWD', methods=['POST'])
+def getUserIDFWD():
+    userData = {
+         "userID" : request.json["userId"]
+    }
+    
+    auth_url = "http://103.116.163.61/getUserDB"
+    auth_response = requests.post(auth_url, json=userData)
+    if auth_response == 200:
+         return jsonify({"status":"true", "message":"auth success","url":f"https://irctc.insightengine.in?redirect_token="})
+    else:
+         return jsonify({"status":"false", "message":"auth failed"})
+
+
+@app.route('/db/fetchtxn', methods=['POST'])
+def fetchtxn2():
+     userData = {
+          "sizes":int(request.json['sizes'])
+     }
+     
+     url = "http://172.30.72.15:5050/fetchtxn"
+     auth_response = requests.post(url, json=userData)
+     if auth_response == 200:
+        return jsonify({"status": True, "response": auth_response})
+     else:
+        return jsonify({"status": False, "response": auth_response})
+
 
 
 if __name__ == '__main__':
