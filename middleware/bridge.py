@@ -32,7 +32,7 @@ def dbWrite(data):
 
 def get_mnemonic_content(did):
             path = home_directory
-            path = "/home/saishibu/Rubix-Docker/rubix"
+            path = "/Rubix-Docker/rubix"
             #Testnet
             mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
             #Mainnet
