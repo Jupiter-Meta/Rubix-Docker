@@ -1,4 +1,4 @@
 flask
-flask-corsdock
+Flask-Cors
 requests
 pymongo
