@@ -4,7 +4,7 @@ import requests,json, time, sys
 from flask_cors import CORS
 import json
 import os, subprocess
-from dbConnect import fetchUserTransactions, fetchUserAttributes
+from dbConnect import fetchUserTransactions, fetchUserAttributes, fetchUserTransactionswithID, fetchUserAttributeswithID
 
 
 
@@ -124,6 +124,18 @@ def fetchtxn():
 def fetchattr():
     size = int(request.json.get('size'))
     response = fetchUserAttributes(size)
+    return response
+
+@app.route('/fetchtxnwithuserid', methods=['POST'])
+def fetchtxnwithuserid():
+    userId = int(request.json.get('userId'))
+    response = fetchUserTransactionswithID(userId)
+    return response
+
+@app.route('/fetchattrwithuserid', methods=['POST'])
+def fetchattrwithuserid():
+    userId = int(request.json.get('userId'))
+    response = fetchUserAttributeswithID(userId)
     return response
 
 if __name__ == '__main__':
