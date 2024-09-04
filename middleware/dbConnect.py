@@ -101,8 +101,7 @@ def fetchUserTransactionswithID(userID):
     }
     conn = None
     cur = None
-    for i in range(1):
-    # try:
+    try:
         # Connect to the PostgreSQL database
         conn = psycopg2.connect(**connection_params)
         
@@ -126,15 +125,15 @@ def fetchUserTransactionswithID(userID):
         
         return results
         
-    # except Exception as e:
-    #     print("An error occurred:", e)
-    #     return None
-    # finally:
-    #     # Close the cursor and connection
-    #     if cur:
-    #         cur.close()
-    #     if conn:
-    #         conn.close()
+    except Exception as e:
+        print("An error occurred:", e)
+        return None
+    finally:
+        # Close the cursor and connection
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 def fetchUserAttributeswithID(userID):
     userid_cleaned = userID.replace("'", "")
