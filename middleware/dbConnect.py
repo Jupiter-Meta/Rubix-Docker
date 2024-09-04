@@ -91,6 +91,7 @@ def fetchUserAttributes(fetchSize):
             conn.close()
 
 def fetchUserTransactionswithID(userID):
+    userid_cleaned = userID.replace("'", "")
     connection_params = {
     'host': 'udchalo-preprod-db.cluster-cnhilnddjsql.ap-south-1.rds.amazonaws.com',
     'port': 5432,
@@ -109,7 +110,7 @@ def fetchUserTransactionswithID(userID):
         cur = conn.cursor()
         
         # Execute a query
-        cur.execute(f"SELECT * FROM usertransactions WHERE userid = %s;", (userID,))
+        cur.execute(f"SELECT * FROM usertransactions WHERE userid = %s;", (userid_cleaned,))
         
         # Fetch all rows from the executed query
         records = cur.fetchall()
@@ -136,6 +137,7 @@ def fetchUserTransactionswithID(userID):
     #         conn.close()
 
 def fetchUserAttributeswithID(userID):
+    userid_cleaned = userID.replace("'", "")
     connection_params = {
     'host': 'udchalo-preprod-db.cluster-cnhilnddjsql.ap-south-1.rds.amazonaws.com',
     'port': 5432,
@@ -153,7 +155,7 @@ def fetchUserAttributeswithID(userID):
         cur = conn.cursor()
         
         # Execute a query
-        cur.execute(f"SELECT * FROM userattributes WHERE userid = %s;", (userID,))
+        cur.execute(f"SELECT * FROM userattributes WHERE userid = %s;", (userid_cleaned,))
         
         # Fetch all rows from the executed query
         records = cur.fetchall()
