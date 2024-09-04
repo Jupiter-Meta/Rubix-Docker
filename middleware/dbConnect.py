@@ -153,7 +153,7 @@ def fetchUserAttributeswithID(userID):
         cur = conn.cursor()
         
         # Execute a query
-        cur.execute(f"SELECT * FROM userattributes WHERE userid IS %s;", (userID,))
+        cur.execute(f"SELECT * FROM userattributes WHERE userid = %s;", (userID,))
         
         # Fetch all rows from the executed query
         records = cur.fetchall()
