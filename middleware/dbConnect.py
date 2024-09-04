@@ -128,12 +128,12 @@ def fetchUserTransactionswithID(userID):
     # except Exception as e:
     #     print("An error occurred:", e)
     #     return None
-    finally:
-        # Close the cursor and connection
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
+    # finally:
+    #     # Close the cursor and connection
+    #     if cur:
+    #         cur.close()
+    #     if conn:
+    #         conn.close()
 
 def fetchUserAttributeswithID(userID):
     connection_params = {
