@@ -128,13 +128,13 @@ def fetchattr():
 
 @app.route('/fetchtxnwithuserid', methods=['POST'])
 def fetchtxnwithuserid():
-    userId = int(request.json.get('userId'))
+    userId = (request.json.get('userId'))
     response = fetchUserTransactionswithID(userId)
     return response
 
 @app.route('/fetchattrwithuserid', methods=['POST'])
 def fetchattrwithuserid():
-    userId = int(request.json.get('userId'))
+    userId = (request.json.get('userId'))
     response = fetchUserAttributeswithID(userId)
     return response
 
