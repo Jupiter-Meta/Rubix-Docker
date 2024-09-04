@@ -134,7 +134,7 @@ def fetchUserTransactionswithID(userID):
         if conn:
             conn.close()
 
-def fetchUserAttributeswithID(userID)
+def fetchUserAttributeswithID(userID):
     connection_params = {
     'host': 'udchalo-preprod-db.cluster-cnhilnddjsql.ap-south-1.rds.amazonaws.com',
     'port': 5432,
