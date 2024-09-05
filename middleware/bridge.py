@@ -4,9 +4,7 @@ import requests,json, time, sys
 from flask_cors import CORS
 import json
 import os, subprocess
-from dbConnect import fetchUserTransactions, fetchUserAttributes, fetchUserTransactionswithID, fetchUserAttributeswithID
-
-
+from dbConnect import fetchUserTransactions, fetchUserAttributes, fetchUserTransactionswithID, fetchUserAttributeswithID, writeAttributes
 
 current_directory = os.getcwd()
 print("Current Directory:", current_directory)
@@ -137,6 +135,15 @@ def fetchattrwithuserid():
     userId = (request.json.get('userId'))
     response = fetchUserAttributeswithID(userId)
     return response
+
+@app.route('/writeAttributes', methods=['POST'])
+def writeAttributes():
+	data = (request.json.get('data'))
+	response = writeAttributes(data)
+	if response ==1:
+		return jsonify("status":True, "response":response)
+	else:
+		return jsonify("status":False, "response":response)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
