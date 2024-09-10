@@ -7,7 +7,6 @@ import os, subprocess
 from redirectToken import generate_token
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://jmRubix:JupiterMeta%40jmRubix@jm-rubix.qmlx6.mongodb.net/')
 db = client['jmdidtable']
 collection = db['irctcusers']
 
