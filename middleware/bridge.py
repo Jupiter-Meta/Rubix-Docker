@@ -137,7 +137,7 @@ def fetchattrwithuserid():
     return response
 
 @app.route('/writeAttributes', methods=['POST'])
-def writeAttributes():
+def writeAttributes1():
 	data = (request.json.get('data'))
 	response = writeAttributes(data)
 	return response
