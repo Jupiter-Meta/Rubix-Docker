@@ -199,7 +199,7 @@ def writeAttributes(data):
         cur = conn.cursor()
         insert_query = """INSERT INTO userattributes (did, userid, onboarded, keywords, attributes) VALUES (%s, %s, %s, %s, %s);"""
         # Execute a query
-        cursor.execute(insert_query, (data["did"], data["userId"], data["onboarded"], data["keywords"], data["attributes"]))
+        cur.execute(insert_query, (data["did"], data["userId"], data["onboarded"], data["keywords"], data["attributes"]))
         
         # Fetch all rows from the executed query
         connection.commit()
