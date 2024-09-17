@@ -140,11 +140,11 @@ def fetchattrwithuserid():
 def writeAttributes1():
 	data = (request.json.get('data'))
 	response = writeAttributes(data)
-	return response
-	# if response ==1:
-	# 	return jsonify("status":"true", "response":response)
-	# else:
-	# 	return jsonify("status":"false", "response":response)
-
+	# return response
+	if response ==1:
+		return jsonify("status":"true", "response":response)
+	else:
+		return jsonify("status":"false", "response":response)
+		
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
