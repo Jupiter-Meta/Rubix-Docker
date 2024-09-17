@@ -142,9 +142,9 @@ def writeAttributes1():
 	response = writeAttributes(data)
 	# return response
 	if response ==1:
-		return jsonify("status":"true", "response":response)
+		return jsonify(response)
 	else:
-		return jsonify("status":"false", "response":response)
+		return jsonify(response)
 		
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
