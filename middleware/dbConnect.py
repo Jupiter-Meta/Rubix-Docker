@@ -202,13 +202,13 @@ def writeAttributes(data):
         cur.execute(insert_query, (data["did"], data["userId"], data["onboarded"], data["keywords"], data["attributes"]))
         
         # Fetch all rows from the executed query
-        connection.commit()
+        conn.commit()
         
         return 1
         
     except Exception as e:
         print("An error occurred:", e)
-        return None
+        return e
     finally:
         # Close the cursor and connection
         if cur:
