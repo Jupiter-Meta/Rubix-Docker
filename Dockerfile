@@ -7,6 +7,7 @@ FROM ubuntu:20.04
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -15,18 +16,11 @@ WORKDIR /app
 
 # COPY . /app
 
-# Copy Rubix application files to the container
-COPY rubix /app/rubix
-
-# Copy Flask middleware files to the container
-COPY middleware /app/middleware
-
-COPY rubix/ipfs /app
-
-# COPY kubernetes /app/kubernetes
-
-# COPY entrypoint.sh .
-# RUN chmod +x entrypoint.sh
+# Copy all applications to the container
+COPY . .
+COPY rubix/* /app/
+COPY rubix/rubixgoplatform /app/rubix/
+RUN ls -al
 
 # Install Flask
 RUN pip3 install Flask Flask-Cors requests
@@ -37,10 +31,7 @@ RUN chmod +x /app/rubix/rubixgoplatform
 # Expose ports for Rubix and Flask
 EXPOSE 11500 20000 5002 4002 5050 22010 8081
 
-CMD python3 /app/middleware/bridge.py & ./app/rubix/rubixgoplatform run -p node1 -n 0 -s -testNet
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord"]
 
-
-
-# Start Rubix and Flask middleware
-# CMD  /app/rubix/run.sh
-# ENTRYPOINT ["./entrypoint.sh"]
+# CMD python3 /app/bridge.py && /app/rubix/rubixgoplatform run -p node1 -n 0 -s
