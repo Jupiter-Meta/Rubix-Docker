@@ -9,7 +9,7 @@ current_directory = os.getcwd()
 print("Current Directory:", current_directory)
 
 # os.chdir(current_directory+"/..")
-home_directory = "/Rubix-Docker"
+home_directory = "/app"
 # print(home_directory)
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ CORS(app)
 
 def get_mnemonic_content(did):
             path = home_directory
-            path = "/Rubix-Docker/rubix"
+            path = "/app/rubix"
             #Testnet
             mnemonic_path = os.path.join(path, 'node1', 'Rubix', did, 'mnemonic.txt')
             #Mainnet
