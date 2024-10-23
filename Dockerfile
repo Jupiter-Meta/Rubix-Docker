@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 COPY bridge.py /app
+COPY rubix/swarm.key /app
 
 # Copy Rubix application files to the container
 COPY rubix /app/rubix
