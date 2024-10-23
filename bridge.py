@@ -76,9 +76,9 @@ def createbibdid():
                 else:
                     return "Failed to create DID"
         except Exception as e:
-             return f"Failed to create DID - error in rubix node, {e}"
+             return jsonify{"error":f"Failed to create DID - error in rubix node, {e}", "sttatus":False}
     except Exception as e:
-        return f"Failed to create DID - error connecting to rubix node, {e}"
+        return jsonify{"error":f"Failed to create DID - error connecting to rubix node, {e}", "sttatus":False}
         
 		
 if __name__ == '__main__':
