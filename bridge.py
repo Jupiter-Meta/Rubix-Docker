@@ -18,7 +18,7 @@ CORS(app)
 
 def get_mnemonic_content(did):
             path = home_directory
-            path = "/app/rubix"
+            path = "/app"
             #Testnet
             mnemonic_path = os.path.join(path, 'node1', 'Rubix', did, 'mnemonic.txt')
             #Mainnet
