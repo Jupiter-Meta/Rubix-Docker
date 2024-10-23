@@ -77,7 +77,7 @@ def createbibdid():
                     return "Failed to create DID"
         except Exception as e:
              return f"Failed to create DID - error in rubix node, {e}"
-    except Exception as e::
+    except Exception as e:
         return f"Failed to create DID - error connecting to rubix node, {e}"
         
 		
