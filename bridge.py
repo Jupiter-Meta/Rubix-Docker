@@ -75,10 +75,10 @@ def createbibdid():
                     return jsonify(didpeerid)
                 else:
                     return "Failed to create DID"
-        except:
-             return "Failed to create DID - error in rubix node"
-    except:
-        return "Failed to create DID - error connecting to rubix node"
+        except Exception as e:
+             return f"Failed to create DID - error in rubix node, {e}"
+    except Exception as e::
+        return f"Failed to create DID - error connecting to rubix node, {e}"
         
 		
 if __name__ == '__main__':
