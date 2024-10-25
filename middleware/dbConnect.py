@@ -1,13 +1,13 @@
 import psycopg2
 
 def fetchUserTransactions(fetchSize):
-    
+
     connection_params = {
-    'host': 'udchalo-preprod-db.cluster-cnhilnddjsql.ap-south-1.rds.amazonaws.com',
+    'host': 'udchalo-rds-db.cluster-cfiksyvhtlto.ap-south-1.rds.amazonaws.com',
     'port': 5432,
-    'database': 'rubix_dev',
-    'user': 'superj_rubix',      # Replace with your actual username
-    'password': 'superj_rubix'   # Replace with your actual password
+    'database': 'rubix_prod',
+    'user': 'superj',      # Replace with your actual username
+    'password': 'SuperPass'   # Replace with your actual password
     }
     conn = None
     cur = None
