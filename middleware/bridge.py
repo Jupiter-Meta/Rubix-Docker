@@ -21,7 +21,7 @@ def get_mnemonic_content(did):
             path = home_directory
             path = "/Rubix-Docker/rubix"
             #Testnet
-            mnemonic_path = os.path.join(path, 'node1', 'Rubix', 'TestNetDID', did, 'mnemonic.txt')
+            mnemonic_path = os.path.join(path, 'node1', 'Rubix', did, 'mnemonic.txt')
             #Mainnet
             # mnemonic_path = os.path.join(path, 'node1', 'Rubix', did, 'mnemonic.txt')
             if os.path.exists(mnemonic_path):
